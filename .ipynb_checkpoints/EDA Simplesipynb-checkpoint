@@ -1,0 +1,237 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "b572e2bd-4653-4e63-8e1d-a440cb812254",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>gender</th>\n",
+       "      <th>race/ethnicity</th>\n",
+       "      <th>parental level of education</th>\n",
+       "      <th>lunch</th>\n",
+       "      <th>test preparation course</th>\n",
+       "      <th>math score</th>\n",
+       "      <th>reading score</th>\n",
+       "      <th>writing score</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>female</td>\n",
+       "      <td>group B</td>\n",
+       "      <td>bachelor's degree</td>\n",
+       "      <td>standard</td>\n",
+       "      <td>none</td>\n",
+       "      <td>72</td>\n",
+       "      <td>72</td>\n",
+       "      <td>74</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>female</td>\n",
+       "      <td>group C</td>\n",
+       "      <td>some college</td>\n",
+       "      <td>standard</td>\n",
+       "      <td>completed</td>\n",
+       "      <td>69</td>\n",
+       "      <td>90</td>\n",
+       "      <td>88</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>female</td>\n",
+       "      <td>group B</td>\n",
+       "      <td>master's degree</td>\n",
+       "      <td>standard</td>\n",
+       "      <td>none</td>\n",
+       "      <td>90</td>\n",
+       "      <td>95</td>\n",
+       "      <td>93</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>male</td>\n",
+       "      <td>group A</td>\n",
+       "      <td>associate's degree</td>\n",
+       "      <td>free/reduced</td>\n",
+       "      <td>none</td>\n",
+       "      <td>47</td>\n",
+       "      <td>57</td>\n",
+       "      <td>44</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>male</td>\n",
+       "      <td>group C</td>\n",
+       "      <td>some college</td>\n",
+       "      <td>standard</td>\n",
+       "      <td>none</td>\n",
+       "      <td>76</td>\n",
+       "      <td>78</td>\n",
+       "      <td>75</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   gender race/ethnicity parental level of education         lunch  \\\n",
+       "0  female        group B           bachelor's degree      standard   \n",
+       "1  female        group C                some college      standard   \n",
+       "2  female        group B             master's degree      standard   \n",
+       "3    male        group A          associate's degree  free/reduced   \n",
+       "4    male        group C                some college      standard   \n",
+       "\n",
+       "  test preparation course  math score  reading score  writing score  \n",
+       "0                    none          72             72             74  \n",
+       "1               completed          69             90             88  \n",
+       "2                    none          90             95             93  \n",
+       "3                    none          47             57             44  \n",
+       "4                    none          76             78             75  "
+      ]
+     },
+     "execution_count": 2,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#setup + carga de dados\n",
+    "\n",
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "import seaborn as sns\n",
+    "\n",
+    "pd.set_option(\"display.max_columns\", None)\n",
+    "df = pd.read_csv(\"data/StudentsPerformance.csv\")\n",
+    "df.head()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "0204eb66-4e52-4e5e-ae8a-b6bc265d6bac",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#visão geral e estatísticas descritivas\n",
+    "\n",
+    "df.info()\n",
+    "df.describe(numeric_only=True)\n",
+    "df.isna().sum()\n",
+    "df.nunique()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f13f8319-5f35-4300-b05f-2582a823ccd7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#gráficos básicos (hist, barras, boxplot)\n",
+    "\n",
+    "sns.histplot(df[\"math score\"], bins=15, kde=True)\n",
+    "plt.title(\"Distribuição: Math Score\"); plt.show()\n",
+    "\n",
+    "sns.boxplot(x=\"gender\", y=\"math score\", data=df)\n",
+    "plt.title(\"Boxplot: Math Score por Gênero\"); plt.show()\n",
+    "\n",
+    "sns.barplot(x=\"parental level of education\", y=\"reading score\", data=df, estimator=np.mean)\n",
+    "plt.xticks(rotation=30, ha=\"right\"); plt.title(\"Média de Reading por Escolaridade dos Pais\"); plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "3b9fc155-022b-4182-b72e-1ba523f03309",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#“conjuntos” na prática (do seu PDF de Conjuntos)\n",
+    "\n",
+    "aprov_math = set(df.index[df[\"math score\"] >= 60])\n",
+    "aprov_read = set(df.index[df[\"reading score\"] >= 60])\n",
+    "\n",
+    "print(\"Aprovados em ambos (interseção):\", len(aprov_math & aprov_read))\n",
+    "print(\"Aprovados em pelo menos uma (união):\", len(aprov_math | aprov_read))\n",
+    "print(\"Aprovados só em matemática (diferença):\", len(aprov_math - aprov_read))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "6b2638d6-21a2-4db1-b0c1-2d6caded79f9",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#“lógica proposicional” aplicada\n",
+    "\n",
+    "df[\"aprovado\"] = (df[\"math score\"] >= 60) & (df[\"reading score\"] >= 60)\n",
+    "df[\"reforco\"]  = (df[\"math score\"] < 60) | (df[\"reading score\"] < 60)\n",
+    "df[[\"math score\",\"reading score\",\"aprovado\",\"reforco\"]].head()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a7ab2c5a-a49c-4e68-a974-4a8ad6cbff2b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#probabilidades simples (condicionais)\n",
+    "\n",
+    "prob_aprov_geral = (df[\"aprovado\"]).mean()\n",
+    "prob_aprov_por_genero = df.groupby(\"gender\")[\"aprovado\"].mean()\n",
+    "prob_aprov_por_lunch  = df.groupby(\"lunch\")[\"aprovado\"].mean()\n",
+    "\n",
+    "prob_aprov_geral, prob_aprov_por_genero, prob_aprov_por_lunch\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "student_perf",
+   "language": "python",
+   "name": "student_perf"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
