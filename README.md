@@ -17,3 +17,15 @@ Inclui:
 ```bash
 git clone https://github.com/mi-miriangs/student-performance-logic-streamlit.git
 cd student-performance-logic-streamlit
+
+### Apps
+- `app.py` → EDA + Lógica & Conjuntos + Produto cartesiano + ML (PyCaret Classificação)
+- `b2_cluster_app/app.py` → Clusterização (PyCaret Clustering) + métricas + dendrograma + heatmap
+
+### Rodar o app principal
+conda activate student_perf
+streamlit run app.py
+
+### Rodar o app de clusterização (Aulas B2)
+conda activate student_perf
+streamlit run b2_cluster_app/app.py
